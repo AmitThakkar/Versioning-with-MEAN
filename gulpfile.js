@@ -31,6 +31,11 @@
                 taskName: 'home.javascript',
                 srcFiles: [srcFolder + 'components/home/home.controller.js'],
                 dest: destFolder + 'components/home'
+            },
+            {
+                taskName: 'application.javascript',
+                srcFiles: [srcFolder + 'components/application/application.controller.js'],
+                dest: destFolder + 'components/application'
             }
         ],
         htmlTasks = [
@@ -38,6 +43,11 @@
                 taskName: 'home.html',
                 srcFiles: [srcFolder + 'components/home/_home.html'],
                 dest: destFolder + 'components/home/'
+            },
+            {
+                taskName: 'application.html',
+                srcFiles: [srcFolder + 'components/application/_application.html'],
+                dest: destFolder + 'components/application/'
             }
         ],
         now = '-' + Date.now(),
@@ -115,6 +125,8 @@
         gulp.watch(srcFolder + 'components/**/*.main.js', ['angular-amd']);
         gulp.watch(srcFolder + 'components/home/*.html', ['home.html']);
         gulp.watch(srcFolder + 'components/home/*.js', ['home.javascript']);
+        gulp.watch(srcFolder + 'components/application/*.html', ['application.html']);
+        gulp.watch(srcFolder + 'components/application/*.js', ['application.javascript']);
     });
     gulp.task('dev', function (callback) {
         environment = 'development';
