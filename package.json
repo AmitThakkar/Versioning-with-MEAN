@@ -1,0 +1,35 @@
+{
+  "name": "Versioning-with-MEAN",
+  "version": "1.0.0",
+  "description": "This repository contains a basic demo for managing the versioning with MEAN Stack",
+  "main": "app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AmitThakkar/Versioning-with-MEAN.git"
+  },
+  "keywords": [
+    "MEAN",
+    "revesions",
+    "MongoDB",
+    "NodeJS",
+    "AngularJS",
+    "ExpressJS",
+    "ECMA6"
+  ],
+  "author": "Amit Thakkar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmitThakkar/Versioning-with-MEAN/issues"
+  },
+  "homepage": "https://github.com/AmitThakkar/Versioning-with-MEAN",
+  "dependencies": {
+    "angular": "^1.4.1",
+    "body-parser": "^1.13.1",
+    "express": "^4.13.0",
+    "mongoose": "^4.0.6",
+    "winston": "^1.0.0"
+  }
+}
