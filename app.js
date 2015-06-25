@@ -18,7 +18,7 @@
     db.once('open', function () {
         winston.info('Connected with mongodb on ', mongoURL);
     });
-    app.use(express.static('client'));
+    app.use('/build', express.static('build'));
     app.use(express.static('node_modules'));
     app.use(bodyParser.json());
     app.use(function (req, res, next) {
