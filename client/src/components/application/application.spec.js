@@ -15,3 +15,14 @@ describe('Home Module Controller test cases', function () {
         expect(homeController.page).toEqual('Home Page Home Service');
     });
 });
+describe('Home Module, Service test cases', function () {
+    var homeService;
+    beforeEach(angular.mock.module("angular-amd.home"));
+    beforeEach(inject(function (_HomeService_) {
+        homeService = _HomeService_;
+    }));
+    it('checks service a name', function () {
+        //dump(homeService.getName());
+        expect(homeService.getName()).toEqual('Home Service');
+    });
+});

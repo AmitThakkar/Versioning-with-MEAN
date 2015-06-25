@@ -4,9 +4,8 @@
 (function (ng, require) {
     'use strict';
     var homeApp = ng.module(require('./home.main.js').moduleName);
-    require('./home.service.js');
-    homeApp.controller('HomeController', ['HomeService', function (HomeService) {
+    homeApp.controller('HomeController', [function () {
         var homeController = this;
-        homeController.page = 'Home Page ' + HomeService.getName();
+        homeController.page = 'Welcome in Revesioning!';
     }]);
 })(angular, require);

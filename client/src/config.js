@@ -11,7 +11,8 @@
     ];
     // If your module have route configuration then push module main file to moduleMainFiles.
     var moduleMainFiles = [
-        require('./components/home/home.main')
+        require('./components/home/home.main'),
+        require('./components/application/application.main')
     ];
     // If your module have not route configuration then don't neet push module to internalModuleObjects.
     var withoutRouteMainFiles = [

@@ -58,7 +58,8 @@
         return gulp.src(srcFolder + '../index.html')
             .pipe(inject(gulp.src(destFolder + 'angular-amd*.js', {read: false}), {relative: true}))
             .pipe(gulpif(!isDevelopmentEnvironment, minifyHTML()))
-            .pipe(gulp.dest('./build/'));
+            .pipe(gulp.dest('./build/'))
+            .pipe(gulpif(isDevelopmentEnvironment, livereload()));
     });
     gulp.task('assets', function () {
         return gulp.src('app/assets/**/*')
@@ -108,6 +109,7 @@
     });
     gulp.task('watch', function () {
         livereload.listen();
+        gulp.watch(srcFolder + '../index.html', ['index.html']);
         gulp.watch(srcFolder + '*.js', ['angular-amd']);
         gulp.watch(srcFolder + 'shared/*.js', ['angular-amd']);
         gulp.watch(srcFolder + 'components/**/*.main.js', ['angular-amd']);
