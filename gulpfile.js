@@ -101,7 +101,7 @@
     });
     gulp.task('open', function () {
         var options = {
-            url: 'http://localhost:63342/Versioning-with-MEAN/build/'
+            url: 'http://localhost:9000/build/'
         };
         gulp.src('./build/index.html')
             .pipe(open('', options));

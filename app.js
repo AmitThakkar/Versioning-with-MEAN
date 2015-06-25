@@ -26,7 +26,7 @@
         next();
     });
     require('./server/routeMapping')(app);
-    var server = app.listen(3000, function () {
+    var server = app.listen(9000, function () {
         winston.info('TODO app listening at http://localhost:' + server.address().port);
     });
 })(require);
