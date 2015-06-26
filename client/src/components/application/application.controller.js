@@ -7,6 +7,14 @@
     require('./application.service.js');
     applicationApp.controller('ApplicationController', ['ApplicationService', function (ApplicationService) {
         var applicationController = this;
-        applicationController.page = 'Application Page ' + ApplicationService.getName();
+        applicationController.addApplication = function () {
+            ApplicationService.addApplication(applicationController.name, applicationController.status, applicationController.metaData)
+                .success(function (response) {
+                    console.log(response)
+                })
+                .error(function (error) {
+                    console.log(error);
+                });
+        };
     }]);
 })(angular, require);

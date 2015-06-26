@@ -4,10 +4,10 @@
 
 (function (require, module) {
     var winston = require('winston');
-    var Employee = require('./employee.domain');
+    var Application = require('./application.domain');
     module.exports.get = function (req, res) {
         var id = req.params.id;
-        Employee.findOneById(id, function (error, user) {
+        Application.findOneById(id, function (error, user) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
@@ -19,7 +19,7 @@
         });
     };
     module.exports.list = function (req, res) {
-        Employee.find(function (error, users) {
+        Application.find(function (error, users) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
@@ -32,7 +32,7 @@
     };
     module.exports.remove = function (req, res) {
         var id = req.params.id;
-        Employee.removeOneById(id, function (error, user) {
+        Application.removeOneById(id, function (error, user) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
@@ -44,12 +44,12 @@
         });
     };
     module.exports.save = function (req, res) {
-        var newEmployeeDetails = req.body;
-        winston.silly('Saving User: ', newEmployeeDetails);
-        new Employee({
-            fname: newEmployeeDetails.fname,
-            lname: newEmployeeDetails.lname,
-            age: newEmployeeDetails.age
+        var newApplicationDetails = req.body;
+        winston.silly('Saving User: ', newApplicationDetails);
+        new Application({
+            name: newApplicationDetails.name,
+            status: newApplicationDetails.status,
+            metaData: newApplicationDetails.metaData
         }).save(function (error, user) {
                 if (error) {
                     winston.error(error);
@@ -60,9 +60,9 @@
             });
     };
     module.exports.update = function (req, res) {
-        var updateEmployeeDetails = req.body;
-        winston.silly('Updating User: ', updateEmployeeDetails);
-        Employee.updateById(updateEmployeeDetails, function(error, isUpdated) {
+        var updateApplicationDetails = req.body;
+        winston.silly('Updating User: ', updateApplicationDetails);
+        Application.updateById(updateApplicationDetails, function(error, isUpdated) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
