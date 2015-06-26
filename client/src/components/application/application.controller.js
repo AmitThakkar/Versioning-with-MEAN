@@ -34,12 +34,20 @@
                 ngDialog.open({
                     templateUrl: 'editApplication.html',
                     controllerAs: 'editApplicationController',
-                    controller:'EditApplicationController',
+                    controller: 'EditApplicationController',
                     className: 'ngdialog-theme-default'
                 });
             };
         }]);
-    applicationApp.controller('EditApplicationController', [function() {
-
+    applicationApp.controller('EditApplicationController', [function () {
+        var editApplicationController = this;
+        var clearEditApplicationDetails = function () {
+            editApplicationController.name = undefined;
+            editApplicationController.status = undefined;
+            editApplicationController.metaData = undefined;
+        };
+        editApplicationController.reset = function () {
+            clearEditApplicationDetails();
+        };
     }]);
 })(angular, require);
