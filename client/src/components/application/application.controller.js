@@ -5,29 +5,41 @@
     'use strict';
     var applicationApp = ng.module(require('./application.main.js').moduleName);
     require('./application.service.js');
-    applicationApp.controller('ApplicationController', ['ApplicationService', function (ApplicationService) {
-        var applicationController = this;
-        var clearNewApplicationDetails = function () {
-            applicationController.name = undefined;
-            applicationController.status = undefined;
-            applicationController.metaData = undefined;
-        };
-        applicationController.addApplication = function () {
-            ApplicationService.addApplication(applicationController.name, applicationController.status, applicationController.metaData)
-                .success(function (response) {
-                    console.log(response);
-                    clearNewApplicationDetails();
+    applicationApp.controller('ApplicationController', ['ApplicationService', 'ngDialog',
+        function (ApplicationService, ngDialog) {
+            var applicationController = this;
+            var clearNewApplicationDetails = function () {
+                applicationController.name = undefined;
+                applicationController.status = undefined;
+                applicationController.metaData = undefined;
+            };
+            applicationController.addApplication = function () {
+                ApplicationService.addApplication(applicationController.name, applicationController.status, applicationController.metaData)
+                    .success(function (response) {
+                        console.log(response);
+                        clearNewApplicationDetails();
+                    })
+                    .error(function (error) {
+                        console.log(error);
+                    });
+            };
+            ApplicationService.getApplicationList()
+                .success(function (applications) {
+                    applicationController.applications = applications;
                 })
                 .error(function (error) {
                     console.log(error);
                 });
-        };
-        ApplicationService.getApplicationList()
-            .success(function (applications) {
-                applicationController.applications = applications;
-            })
-            .error(function (error) {
-                console.log(error);
-            });
+            applicationController.editApplication = function () {
+                ngDialog.open({
+                    templateUrl: 'editApplication.html',
+                    controllerAs: 'editApplicationController',
+                    controller:'EditApplicationController',
+                    className: 'ngdialog-theme-default'
+                });
+            };
+        }]);
+    applicationApp.controller('EditApplicationController', [function() {
+
     }]);
 })(angular, require);

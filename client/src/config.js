@@ -7,7 +7,8 @@
     var MAIN_APP_MODULE = "angular-amd";
     var exports = module.exports;
     var externalModules = [
-        'ngRoute'
+        'ngRoute',
+        'ngDialog'
     ];
     // If your module have route configuration then push module main file to moduleMainFiles.
     var moduleMainFiles = [

@@ -1,7 +1,8 @@
 /**
  * Created by Amit Thakkar on 29/05/15.
  */
-(function(require) {
+(function (require) {
     require('angular');
     require('angular-route');
+    require('ng-dialog');
 })(require);
