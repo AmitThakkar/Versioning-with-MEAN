@@ -19,7 +19,7 @@
         });
     };
     module.exports.list = function (req, res) {
-        Application.find(function (error, users) {
+        Application.findAll(function (error, users) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
