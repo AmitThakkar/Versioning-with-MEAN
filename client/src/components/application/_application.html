@@ -2,3 +2,10 @@ Name: <input type="text" ng-model="applicationController.name">
 Status: <input type="text" ng-model="applicationController.status">
 Meta Data: <input type="text" ng-model="applicationController.metaData">
 <input type="button" value="Add" ng-click="applicationController.addApplication()">
+<hr/>
+<h2>Applications</h2>
+<ul>
+    <li ng-repeat="application in applicationController.applications">
+        {{$index+1}}. Name: {{application.name}} Status: {{application.status}} MetaData: {{application.metaData}}
+    </li>
+</ul>

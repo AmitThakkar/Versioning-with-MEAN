@@ -13,5 +13,8 @@
                 metaData: metaData
             });
         };
+        this.getApplicationList = function () {
+            return $http.get(URL);
+        };
     }]);
 })(angular);
