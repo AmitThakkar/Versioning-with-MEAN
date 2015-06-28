@@ -30,13 +30,13 @@
                 .error(function (error) {
                     console.log(error);
                 });
-            applicationController.editApplication = function (_id) {
+            applicationController.editApplication = function (application) {
                 ngDialog.open({
                     templateUrl: 'editApplication.html',
                     controllerAs: 'editApplicationController',
                     controller: 'EditApplicationController',
                     className: 'ngdialog-theme-default',
-                    data: {_id: _id}
+                    data: application
                 });
             };
             applicationController.showHistory = function (_id) {
@@ -53,24 +53,25 @@
     applicationApp.controller('EditApplicationController', ['ApplicationService', '$scope',
         function (ApplicationService, $scope) {
             var editApplicationController = this;
-            var clearEditApplicationDetails = function () {
-                editApplicationController.name = undefined;
-                editApplicationController.status = undefined;
-                editApplicationController.metaData = undefined;
+            var resetApplicationDetails = function () {
+                editApplicationController.name = $scope.ngDialogData.name;
+                editApplicationController.status = $scope.ngDialogData.status;
+                editApplicationController.metaData = $scope.ngDialogData.metaData;
             };
             editApplicationController.reset = function () {
-                clearEditApplicationDetails();
+                resetApplicationDetails();
             };
             editApplicationController.update = function () {
                 ApplicationService.updateApplication($scope.ngDialogData._id, editApplicationController.name, editApplicationController.status, editApplicationController.metaData)
                     .success(function (response) {
-                        clearEditApplicationDetails();
+                        resetApplicationDetails();
                         $scope.closeThisDialog();
                     })
                     .error(function (error) {
                         console.log(error);
                     });
             };
+            resetApplicationDetails();
         }
     ]);
     applicationApp.controller('ShowHistoryController', ['ApplicationService', '$scope',

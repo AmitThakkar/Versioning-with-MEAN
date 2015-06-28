@@ -9,7 +9,7 @@ Meta Data: <input type="text" ng-model="applicationController.metaData">
         {{$index+1}}. Name: {{application.name}}
         Status: {{application.status}}
         MetaData: {{application.metaData}}
-        <input type="button" value="Edit" ng-click="applicationController.editApplication(application._id)">
+        <input type="button" value="Edit" ng-click="applicationController.editApplication(application)">
         <input type="button" value="History" ng-click="applicationController.showHistory(application._id)">
     </li>
 </ul>
