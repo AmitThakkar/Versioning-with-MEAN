@@ -7,61 +7,61 @@
     var Application = require('./application.domain');
     module.exports.get = function (req, res) {
         var _id = req.params._id;
-        Application.findOneById(_id, function (error, user) {
+        Application.findOneById(_id, function (error, application) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
-            } else if (!user) {
+            } else if (!application) {
                 res.status(404).send("No record found with " + _id);
             } else {
-                res.status(200).json(user);
+                res.status(200).json(application);
             }
         });
     };
     module.exports.list = function (req, res) {
-        Application.findAll(function (error, users) {
+        Application.findAll(function (error, applications) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
-            } else if (!users) {
-                res.status(404).send("No record found with in User Collection");
+            } else if (!applications) {
+                res.status(404).send("No record found with in Application Collection");
             } else {
-                res.status(200).json(users);
+                res.status(200).json(applications);
             }
         });
     };
     module.exports.remove = function (req, res) {
         var _id = req.params._id;
-        Application.removeOneById(_id, function (error, user) {
+        Application.removeOneById(_id, function (error, application) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
-            } else if (!user) {
+            } else if (!application) {
                 res.status(404).send("No record found with " + _id);
             } else {
-                res.status(200).json(user);
+                res.status(200).json(application);
             }
         });
     };
     module.exports.save = function (req, res) {
         var newApplicationDetails = req.body;
-        winston.silly('Saving User: ', newApplicationDetails);
+        winston.silly('Saving Application: ', newApplicationDetails);
         new Application({
             name: newApplicationDetails.name,
             status: newApplicationDetails.status,
             metaData: newApplicationDetails.metaData
-        }).save(function (error, user) {
+        }).save(function (error, application) {
                 if (error) {
                     winston.error(error);
                     res.status(500).json(error);
                 } else {
-                    res.status(200).json(user);
+                    res.status(200).json(application);
                 }
             });
     };
     module.exports.update = function (req, res) {
         var updateApplicationDetails = req.body;
-        winston.silly('Updating User: ', updateApplicationDetails);
+        winston.silly('Updating Application: ', updateApplicationDetails);
         Application.updateById(updateApplicationDetails, function(error, isUpdated) {
             if (error) {
                 winston.error(error);
@@ -69,7 +69,7 @@
             } else if (!isUpdated) {
                 res.status(404).send("No record found with " + updateApplicationDetails._id);
             } else {
-                res.status(200).json("User Updated");
+                res.status(200).json("Application Updated");
             }
         });
     };

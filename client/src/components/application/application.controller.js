@@ -53,8 +53,8 @@
         editApplicationController.update = function () {
             ApplicationService.updateApplication($scope.ngDialogData._id, editApplicationController.name, editApplicationController.status, editApplicationController.metaData)
                 .success(function (response) {
-                    console.log(response);
                     clearEditApplicationDetails();
+                    $scope.closeThisDialog();
                 })
                 .error(function (error) {
                     console.log(error);
