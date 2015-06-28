@@ -6,13 +6,13 @@
     var winston = require('winston');
     var Application = require('./application.domain');
     module.exports.get = function (req, res) {
-        var id = req.params.id;
-        Application.findOneById(id, function (error, user) {
+        var _id = req.params._id;
+        Application.findOneById(_id, function (error, user) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
             } else if (!user) {
-                res.status(404).send("No record found with " + id);
+                res.status(404).send("No record found with " + _id);
             } else {
                 res.status(200).json(user);
             }
@@ -24,20 +24,20 @@
                 winston.error(error);
                 res.status(500).json(error);
             } else if (!users) {
-                res.status(404).send("No record found with " + id);
+                res.status(404).send("No record found with in User Collection");
             } else {
                 res.status(200).json(users);
             }
         });
     };
     module.exports.remove = function (req, res) {
-        var id = req.params.id;
-        Application.removeOneById(id, function (error, user) {
+        var _id = req.params._id;
+        Application.removeOneById(_id, function (error, user) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
             } else if (!user) {
-                res.status(404).send("No record found with " + id);
+                res.status(404).send("No record found with " + _id);
             } else {
                 res.status(200).json(user);
             }
@@ -67,7 +67,7 @@
                 winston.error(error);
                 res.status(500).json(error);
             } else if (!isUpdated) {
-                res.status(404).send("No record found with " + id);
+                res.status(404).send("No record found with " + updateApplicationDetails._id);
             } else {
                 res.status(200).json("User Updated");
             }

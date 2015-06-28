@@ -30,16 +30,17 @@
                 .error(function (error) {
                     console.log(error);
                 });
-            applicationController.editApplication = function () {
+            applicationController.editApplication = function (_id) {
                 ngDialog.open({
                     templateUrl: 'editApplication.html',
                     controllerAs: 'editApplicationController',
                     controller: 'EditApplicationController',
-                    className: 'ngdialog-theme-default'
+                    className: 'ngdialog-theme-default',
+                    data: {_id: _id}
                 });
             };
         }]);
-    applicationApp.controller('EditApplicationController', [function () {
+    applicationApp.controller('EditApplicationController', ['ApplicationService', '$scope', function (ApplicationService, $scope) {
         var editApplicationController = this;
         var clearEditApplicationDetails = function () {
             editApplicationController.name = undefined;
@@ -48,6 +49,16 @@
         };
         editApplicationController.reset = function () {
             clearEditApplicationDetails();
+        };
+        editApplicationController.update = function () {
+            ApplicationService.updateApplication($scope.ngDialogData._id, editApplicationController.name, editApplicationController.status, editApplicationController.metaData)
+                .success(function (response) {
+                    console.log(response);
+                    clearEditApplicationDetails();
+                })
+                .error(function (error) {
+                    console.log(error);
+                });
         };
     }]);
 })(angular, require);

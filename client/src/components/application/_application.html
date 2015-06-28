@@ -6,7 +6,7 @@ Meta Data: <input type="text" ng-model="applicationController.metaData">
 <h2>Applications</h2>
 <ul>
     <li ng-repeat="application in applicationController.applications">
-        {{$index+1}}. Name: {{application.name}} Status: {{application.status}} MetaData: {{application.metaData}} <input type="button" value="Edit" ng-click="applicationController.editApplication()">
+        {{$index+1}}. Name: {{application.name}} Status: {{application.status}} MetaData: {{application.metaData}} <input type="button" value="Edit" ng-click="applicationController.editApplication(application._id)">
     </li>
 </ul>
 <script type="text/ng-template" id="editApplication.html">
@@ -14,5 +14,5 @@ Meta Data: <input type="text" ng-model="applicationController.metaData">
     Status: <input type="text" ng-model="editApplicationController.status">
     Meta Data: <input type="text" ng-model="editApplicationController.metaData">
     <input type="button" value="Reset" ng-click="editApplicationController.reset()">
-    <input type="button" value="Save" ng-click="editApplicationController.save()">
+    <input type="button" value="Save" ng-click="editApplicationController.update()">
 </script>

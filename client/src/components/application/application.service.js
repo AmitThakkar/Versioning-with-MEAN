@@ -13,6 +13,14 @@
                 metaData: metaData
             });
         };
+        this.updateApplication = function (_id, name, status, metaData) {
+            return $http.put(URL, {
+                _id: _id,
+                name: name,
+                status: status,
+                metaData: metaData
+            });
+        };
         this.getApplicationList = function () {
             return $http.get(URL);
         };
