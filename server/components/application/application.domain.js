@@ -4,14 +4,14 @@
 (function (require, module) {
     var mongoose = require('mongoose');
     var applicationSchema = mongoose.Schema({
-        name: {type: String},
-        status: {type: String},
-        metaData: {type: String},
+        name: {type: String, trim: true, required: 'Name cannot be blank'},
+        status: {type: String, trim: true, required: 'Status cannot be blank'},
+        metaData: {type: String, trim: true, required: 'Meta-Data cannot be blank'},
         history: [{
-            name: {type: String},
-            status: {type: String},
-            metaData: {type: String},
-            isRemoved: {type: Boolean, default: false}
+            name: {type: String, trim: true, required: 'Name cannot be blank'},
+            status: {type: String, trim: true, required: 'Status cannot be blank'},
+            metaData: {type: String, trim: true, required: 'Meta-Data cannot be blank'},
+            createdAt: {type: Number, required: true, default: Date.now}
         }],
         isRemoved: {type: Boolean, default: false},
         createdAt: {type: Number, required: true, default: Date.now}
@@ -35,6 +35,7 @@
             } else {
                 delete application.isRemoved;
                 delete application._id;
+                updateApplicationDetails.createdAt = Date.now();
                 self.update({_id: _id, isRemoved: false}, {
                     $set: updateApplicationDetails,
                     $push: {history: application}
