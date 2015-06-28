@@ -19,6 +19,9 @@
     applicationSchema.static('findOneById', function (_id, callback) {
         this.findOne({_id: _id, isRemoved: false}, {isRemoved: 0, history: 0}).lean().exec(callback);
     });
+    applicationSchema.static('findAllHistoryById', function (_id, callback) {
+        this.findOne({_id: _id, isRemoved: false}, {history: 1}).lean().exec(callback);
+    });
     applicationSchema.static('findAll', function (callback) {
         this.find({isRemoved: false}, {isRemoved: 0, history: 0}).lean().exec(callback);
     });

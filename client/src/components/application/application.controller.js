@@ -39,26 +39,50 @@
                     data: {_id: _id}
                 });
             };
-        }]);
-    applicationApp.controller('EditApplicationController', ['ApplicationService', '$scope', function (ApplicationService, $scope) {
-        var editApplicationController = this;
-        var clearEditApplicationDetails = function () {
-            editApplicationController.name = undefined;
-            editApplicationController.status = undefined;
-            editApplicationController.metaData = undefined;
-        };
-        editApplicationController.reset = function () {
-            clearEditApplicationDetails();
-        };
-        editApplicationController.update = function () {
-            ApplicationService.updateApplication($scope.ngDialogData._id, editApplicationController.name, editApplicationController.status, editApplicationController.metaData)
+            applicationController.showHistory = function (_id) {
+                ngDialog.open({
+                    templateUrl: 'showHistory.html',
+                    controllerAs: 'showHistoryController',
+                    controller: 'ShowHistoryController',
+                    className: 'ngdialog-theme-default',
+                    data: {_id: _id}
+                });
+            };
+        }
+    ]);
+    applicationApp.controller('EditApplicationController', ['ApplicationService', '$scope',
+        function (ApplicationService, $scope) {
+            var editApplicationController = this;
+            var clearEditApplicationDetails = function () {
+                editApplicationController.name = undefined;
+                editApplicationController.status = undefined;
+                editApplicationController.metaData = undefined;
+            };
+            editApplicationController.reset = function () {
+                clearEditApplicationDetails();
+            };
+            editApplicationController.update = function () {
+                ApplicationService.updateApplication($scope.ngDialogData._id, editApplicationController.name, editApplicationController.status, editApplicationController.metaData)
+                    .success(function (response) {
+                        clearEditApplicationDetails();
+                        $scope.closeThisDialog();
+                    })
+                    .error(function (error) {
+                        console.log(error);
+                    });
+            };
+        }
+    ]);
+    applicationApp.controller('ShowHistoryController', ['ApplicationService', '$scope',
+        function (ApplicationService, $scope) {
+            var showHistoryController = this;
+            ApplicationService.getApplicationHistory($scope.ngDialogData._id)
                 .success(function (response) {
-                    clearEditApplicationDetails();
-                    $scope.closeThisDialog();
+                    showHistoryController.histories = response.history;
                 })
                 .error(function (error) {
-                    console.log(error);
+
                 });
-        };
-    }]);
+        }
+    ]);
 })(angular, require);

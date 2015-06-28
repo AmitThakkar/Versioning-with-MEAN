@@ -24,5 +24,8 @@
         this.getApplicationList = function () {
             return $http.get(URL);
         };
+        this.getApplicationHistory = function (_id) {
+            return $http.get(URL + "/history/" + _id);
+        };
     }]);
 })(angular);

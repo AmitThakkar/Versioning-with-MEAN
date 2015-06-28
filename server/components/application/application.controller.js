@@ -18,6 +18,19 @@
             }
         });
     };
+    module.exports.history = function (req, res) {
+        var _id = req.params._id;
+        Application.findAllHistoryById(_id, function (error, application) {
+            if (error) {
+                winston.error(error);
+                res.status(500).json(error);
+            } else if (!application) {
+                res.status(404).send("No record found with " + _id);
+            } else {
+                res.status(200).json(application);
+            }
+        });
+    };
     module.exports.list = function (req, res) {
         Application.findAll(function (error, applications) {
             if (error) {
