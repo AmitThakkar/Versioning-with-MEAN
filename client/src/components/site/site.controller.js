@@ -29,15 +29,6 @@
                 .error(function (error) {
                     console.log(error);
                 });
-            siteController.editSite = function (site) {
-                ngDialog.open({
-                    templateUrl: 'editSite.html',
-                    controllerAs: 'editSiteController',
-                    controller: 'EditSiteController',
-                    className: 'ngdialog-theme-default',
-                    data: site
-                });
-            };
             siteController.showHistory = function (sheetName) {
                 ngDialog.open({
                     templateUrl: 'showSiteHistory.html',
@@ -49,35 +40,11 @@
             };
         }
     ]);
-    siteApp.controller('EditSiteController', ['SiteService', '$scope',
-        function (SiteService, $scope) {
-            var editSiteController = this;
-            var resetSiteDetails = function () {
-                editSiteController.sheetName = $scope.ngDialogData.sheetName;
-                editSiteController.metaData = $scope.ngDialogData.metaData;
-            };
-            editSiteController.reset = function () {
-                resetSiteDetails();
-            };
-            editSiteController.update = function () {
-                SiteService.updateSite(editSiteController.sheetName, editSiteController.metaData)
-                    .success(function (response) {
-                        resetSiteDetails();
-                        $scope.closeThisDialog();
-                    })
-                    .error(function (error) {
-                        console.log(error);
-                    });
-            };
-            resetSiteDetails();
-        }
-    ]);
     siteApp.controller('ShowSiteHistoryController', ['SiteService', '$scope',
         function (SiteService, $scope) {
             var showSiteHistoryController = this;
             SiteService.getSiteHistory($scope.ngDialogData.sheetName)
                 .success(function (response) {
-                    console.log(response)
                     showSiteHistoryController.histories = response;
                 })
                 .error(function (error) {

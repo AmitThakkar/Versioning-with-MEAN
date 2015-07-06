@@ -26,19 +26,23 @@
     sitesSchema.static('removeOneById', function (_id, callback) {
         this.update({_id: _id}, {$set: {isRemoved: true}}, callback);
     });
-    sitesSchema.static('updateBySheetName', function (updateSiteDetails, callback) {
+    sitesSchema.static('saveNewSheetDetails', function (newSheetDetails, callback) {
         var self = this;
         self.findOneAndUpdate({
-            sheetName: updateSiteDetails.sheetName,
+            sheetName: newSheetDetails.sheetName,
             current: true
         }, {$set: {current: false}}, function (error, site) {
             if (error) {
                 callback(error);
             } else {
+                var version = 1;
+                if(site) {
+                    version = site.version + 1;
+                }
                 new Site({
-                    sheetName: updateSiteDetails.sheetName,
-                    version: site.version + 1,
-                    metaData: updateSiteDetails.metaData
+                    sheetName: newSheetDetails.sheetName,
+                    version: version,
+                    metaData: newSheetDetails.metaData
                 }).save(callback);
             }
         });

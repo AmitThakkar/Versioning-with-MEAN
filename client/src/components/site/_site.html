@@ -9,16 +9,9 @@ Meta Data: <input type="text" ng-model="siteController.metaData">
         MetaData: {{site.metaData}}
         Version: {{site.version}}
         Created At: {{site.createdAt | date : 'hh:mm:ss, dd MM, yyyy'}}
-        <input type="button" value="Edit" ng-click="siteController.editSite(site)">
         <input type="button" value="History" ng-click="siteController.showHistory(site.sheetName)">
     </li>
 </ul>
-<script type="text/ng-template" id="editSite.html">
-    Sheet Name: <input type="text" readonly ng-model="editSiteController.sheetName">
-    Meta Data: <input type="text" ng-model="editSiteController.metaData">
-    <input type="button" value="Reset" ng-click="editSiteController.reset()">
-    <input type="button" value="Save" ng-click="editSiteController.update()">
-</script>
 <script type="text/ng-template" id="showSiteHistory.html">
     <ul>
         <li ng-repeat="siteHistory in showSiteHistoryController.histories">

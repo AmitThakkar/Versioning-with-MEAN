@@ -20,7 +20,7 @@
     });
     //CORS middleware
     var allowCrossDomain = function (req, res, next) {
-        res.header('Access-Control-Allow-Origin', 'example.com');
+        res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
         res.header('Access-Control-Allow-Headers', 'Content-Type');
         next();
@@ -29,6 +29,10 @@
     app.use('/build', express.static('build'));
     app.use(express.static('node_modules'));
     app.use(allowCrossDomain);
+    // configure the app to use bodyParser()
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
     app.use(bodyParser.json());
     app.use(function (req, res, next) {
         winston.silly("Request: ", req.url);

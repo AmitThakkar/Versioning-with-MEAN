@@ -56,31 +56,14 @@
         });
     };
     module.exports.save = function (req, res) {
-        var newApplicationDetails = req.body;
-        winston.silly('Saving Site: ', newApplicationDetails);
-        new Site({
-            sheetName: newApplicationDetails.sheetName,
-            metaData: newApplicationDetails.metaData
-        }).save(function (error, site) {
-                if (error) {
-                    winston.error(error);
-                    res.status(500).json(error);
-                } else {
-                    res.status(200).json(site);
-                }
-            });
-    };
-    module.exports.update = function (req, res) {
-        var updateSiteDetails = req.body;
-        winston.silly('Updating Site: ', updateSiteDetails);
-        Site.updateBySheetName(updateSiteDetails, function (error, isUpdated) {
+        var newSheetDetails = req.body;
+        winston.silly('Saving Site: ', newSheetDetails);
+        Site.saveNewSheetDetails(newSheetDetails, function (error, site) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
-            } else if (!isUpdated) {
-                res.status(404).send("No record found with " + updateSiteDetails._id);
             } else {
-                res.status(200).json("Site Updated");
+                res.status(200).json(site);
             }
         });
     };
