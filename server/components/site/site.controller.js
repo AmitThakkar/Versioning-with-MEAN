@@ -19,15 +19,15 @@
         });
     };
     module.exports.history = function (req, res) {
-        var _id = req.params._id;
-        Site.findAllHistoryById(_id, function (error, site) {
+        var sheetName = req.params.sheetName;
+        Site.findAllHistoryBySheetName(sheetName, function (error, sites) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
-            } else if (!site) {
-                res.status(404).send("No record found with " + _id);
+            } else if (!sites) {
+                res.status(404).send("No record found with " + sheetName);
             } else {
-                res.status(200).json(site);
+                res.status(200).json(sites);
             }
         });
     };

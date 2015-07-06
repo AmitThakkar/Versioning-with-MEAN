@@ -38,13 +38,13 @@
                     data: site
                 });
             };
-            siteController.showHistory = function (_id) {
+            siteController.showHistory = function (sheetName) {
                 ngDialog.open({
                     templateUrl: 'showSiteHistory.html',
                     controllerAs: 'showSiteHistoryController',
                     controller: 'ShowSiteHistoryController',
                     className: 'ngdialog-theme-default',
-                    data: {_id: _id}
+                    data: {sheetName: sheetName}
                 });
             };
         }
@@ -75,7 +75,7 @@
     siteApp.controller('ShowSiteHistoryController', ['SiteService', '$scope',
         function (SiteService, $scope) {
             var showSiteHistoryController = this;
-            SiteService.getSiteHistory($scope.ngDialogData._id)
+            SiteService.getSiteHistory($scope.ngDialogData.sheetName)
                 .success(function (response) {
                     showSiteHistoryController.histories = response.history;
                 })

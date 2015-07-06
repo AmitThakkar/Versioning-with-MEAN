@@ -21,8 +21,8 @@
         this.getSiteList = function () {
             return $http.get(URL);
         };
-        this.getSiteHistory = function (_id) {
-            return $http.get(URL + "/history/" + _id);
+        this.getSiteHistory = function (sheetName) {
+            return $http.get(URL + "/history/" + sheetName);
         };
     }]);
 })(angular);

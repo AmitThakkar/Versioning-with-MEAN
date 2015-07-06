@@ -10,7 +10,7 @@ Meta Data: <input type="text" ng-model="siteController.metaData">
         Version: {{site.version}}
         Created At: {{site.createdAt | date : 'hh:mm:ss, dd MM, yyyy'}}
         <input type="button" value="Edit" ng-click="siteController.editSite(site)">
-        <input type="button" value="History" ng-click="siteController.showHistory(site._id)">
+        <input type="button" value="History" ng-click="siteController.showHistory(site.sheetName)">
     </li>
 </ul>
 <script type="text/ng-template" id="editSite.html">

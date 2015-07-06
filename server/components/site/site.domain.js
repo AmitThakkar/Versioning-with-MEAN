@@ -15,7 +15,7 @@
         this.findOne({_id: _id, isRemoved: false, current: true}, {isRemoved: 0}).lean().exec(callback);
     });
     sitesSchema.static('findAllHistoryBySheetName', function (sheetName, callback) {
-        this.findOne({sheetName: sheetName, isRemoved: false}, {isRemoved: 0}).lean().exec(callback);
+        this.findOne({sheetName: sheetName, isRemoved: false}, {isRemoved: 0}, {version: -1}).lean().exec(callback);
     });
     sitesSchema.static('findAll', function (callback) {
         this.find({isRemoved: false, current: true}, {isRemoved: 0}).lean().exec(callback);

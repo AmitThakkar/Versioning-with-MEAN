@@ -9,6 +9,6 @@
         app.post('/site', SiteController.save);
         app.put('/site', SiteController.update);
         app.delete('/site/:_id', SiteController.remove);
-        app.get('/site/history/:_id', SiteController.history);
+        app.get('/site/history/:sheetName', SiteController.history);
     };
 })(module, require);
