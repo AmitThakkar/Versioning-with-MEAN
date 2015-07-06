@@ -12,7 +12,10 @@
         createdAt: {type: Number, required: true, default: Date.now}
     });
     sitesSchema.static('findAllHistoryBySheetName', function (sheetName, callback) {
-        this.findOne({sheetName: sheetName, isRemoved: false}, {isRemoved: 0}, {version: -1}).lean().exec(callback);
+        this.find({
+            sheetName: sheetName,
+            isRemoved: false
+        }, {isRemoved: 0}, {sort: {version: -1}}).lean().exec(callback);
     });
     sitesSchema.static('findAll', function (callback) {
         this.find({isRemoved: false, current: true}, {isRemoved: 0}).lean().exec(callback);

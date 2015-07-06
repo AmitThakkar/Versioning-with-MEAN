@@ -77,7 +77,8 @@
             var showSiteHistoryController = this;
             SiteService.getSiteHistory($scope.ngDialogData.sheetName)
                 .success(function (response) {
-                    showSiteHistoryController.histories = response.history;
+                    console.log(response)
+                    showSiteHistoryController.histories = response;
                 })
                 .error(function (error) {
 
