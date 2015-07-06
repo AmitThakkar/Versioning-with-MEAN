@@ -17,6 +17,13 @@
             isRemoved: false
         }, {isRemoved: 0}, {sort: {version: -1}}).lean().exec(callback);
     });
+    sitesSchema.static('findOneBySheetNameAndVersion', function (sheetName, version, callback) {
+        this.findOne({sheetName: sheetName, version: version, isRemoved: false}, {
+            isRemoved: 0,
+            current: 0,
+            _id: 0
+        }).lean().exec(callback);
+    });
     sitesSchema.static('findAll', function (callback) {
         this.find({isRemoved: false, current: true}, {isRemoved: 0}).lean().exec(callback);
     });
@@ -36,7 +43,7 @@
                 callback(error);
             } else {
                 var version = 1;
-                if(site) {
+                if (site) {
                     version = site.version + 1;
                 }
                 new Site({

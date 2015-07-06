@@ -4,6 +4,7 @@
 (function (module, require) {
     var SiteController = require('./site.controller');
     module.exports = function (app) {
+        app.get('/site/:sheetName/:version', SiteController.get);
         app.get('/site', SiteController.list);
         app.get('/site/sheetNameAndVersion', SiteController.sheetNameAndVersion);
         app.post('/site', SiteController.save);

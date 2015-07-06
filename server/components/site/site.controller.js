@@ -30,6 +30,20 @@
             }
         });
     };
+    module.exports.get = function (req, res) {
+        var sheetName = req.params.sheetName;
+        var version = req.params.version;
+        Site.findOneBySheetNameAndVersion(sheetName, version, function (error, site) {
+            if (error) {
+                winston.error(error);
+                res.status(500).json(error);
+            } else if (!site) {
+                res.status(404).send("No record found with SheetName " + sheetName + " and version: " + version);
+            } else {
+                res.status(200).json(site);
+            }
+        });
+    };
     module.exports.sheetNameAndVersion = function (req, res) {
         Site.findAllSheetNameAndVersion(function (error, sites) {
             if (error) {
