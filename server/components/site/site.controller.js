@@ -5,19 +5,6 @@
 (function (require, module) {
     var winston = require('winston');
     var Site = require('./site.domain');
-    module.exports.get = function (req, res) {
-        var _id = req.params._id;
-        Site.findOneById(_id, function (error, site) {
-            if (error) {
-                winston.error(error);
-                res.status(500).json(error);
-            } else if (!site) {
-                res.status(404).send("No record found with " + _id);
-            } else {
-                res.status(200).json(site);
-            }
-        });
-    };
     module.exports.history = function (req, res) {
         var sheetName = req.params.sheetName;
         Site.findAllHistoryBySheetName(sheetName, function (error, sites) {
@@ -33,6 +20,18 @@
     };
     module.exports.list = function (req, res) {
         Site.findAll(function (error, sites) {
+            if (error) {
+                winston.error(error);
+                res.status(500).json(error);
+            } else if (!sites) {
+                res.status(404).send("No record found with in Site Collection");
+            } else {
+                res.status(200).json(sites);
+            }
+        });
+    };
+    module.exports.sheetNameAndVersion = function (req, res) {
+        Site.findAllSheetNameAndVersion(function (error, sites) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);
@@ -74,7 +73,7 @@
     module.exports.update = function (req, res) {
         var updateSiteDetails = req.body;
         winston.silly('Updating Site: ', updateSiteDetails);
-        Site.updateBySheetName(updateSiteDetails, function(error, isUpdated) {
+        Site.updateBySheetName(updateSiteDetails, function (error, isUpdated) {
             if (error) {
                 winston.error(error);
                 res.status(500).json(error);

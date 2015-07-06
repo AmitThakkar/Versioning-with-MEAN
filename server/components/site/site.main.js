@@ -4,8 +4,8 @@
 (function (module, require) {
     var SiteController = require('./site.controller');
     module.exports = function (app) {
-        app.get('/site/:_id', SiteController.get);
         app.get('/site', SiteController.list);
+        app.get('/site/sheetNameAndVersion', SiteController.sheetNameAndVersion);
         app.post('/site', SiteController.save);
         app.put('/site', SiteController.update);
         app.delete('/site/:_id', SiteController.remove);
