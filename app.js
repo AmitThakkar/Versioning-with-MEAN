@@ -30,10 +30,11 @@
     app.use(express.static('node_modules'));
     app.use(allowCrossDomain);
     // configure the app to use bodyParser()
-    app.use(bodyParser.urlencoded({
+    app.use(express.json({limit: '50mb'}));
+    app.use(express.urlencoded({
+        limit: '50mb',
         extended: true
     }));
-    app.use(bodyParser.json());
     app.use(function (req, res, next) {
         winston.silly("Request: ", req.url);
         next();
