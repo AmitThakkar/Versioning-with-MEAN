@@ -6,6 +6,7 @@
     var sitesSchema = mongoose.Schema({
         sheetName: {type: String, trim: true, required: 'Sheet Name cannot be blank'},
         metaData: {type: String, trim: true, required: 'Meta-Data cannot be blank'},
+        groupData: {type: String, trim: true},
         isRemoved: {type: Boolean, default: false},
         current: {type: Boolean, default: true},
         version: {type: Number, default: 1},
@@ -49,7 +50,8 @@
                 new Site({
                     sheetName: newSheetDetails.sheetName,
                     version: version,
-                    metaData: newSheetDetails.metaData
+                    metaData: newSheetDetails.metaData,
+                    groupData: newSheetDetails.groupData
                 }).save(callback);
             }
         });
