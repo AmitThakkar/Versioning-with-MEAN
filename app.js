@@ -11,7 +11,7 @@
 
     winston.level = config.winstonLevel;
     var mongoURL = config.datasourceUrl;
-    winston.info('Starting Application in ' + config.environment + ' Environment');
+    winston.info('Starting Application in', config.environment, 'Environment');
     mongoose.connect(mongoURL);
     var db = mongoose.connection;
     db.on('error', function (error) {
@@ -38,7 +38,7 @@
     }));
     app.use(bodyParser.json({limit: '50mb'}));
     app.use(function (req, res, next) {
-        winston.info("Request: ", req.url);
+        winston.info("Request: ", req.url, 'Method: ', req.method);
         next();
     });
     require('./server/routeMapping')(app);
