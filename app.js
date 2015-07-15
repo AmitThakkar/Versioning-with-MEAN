@@ -7,9 +7,10 @@
     var bodyParser = require('body-parser');  // for reading POSTed form data into `req.body`
     var mongoose = require('mongoose');
     var winston = require('winston');
-    winston.level = 'silly';
+    var config = require('./server/config')();
 
-    var mongoURL = 'mongodb://localhost/history';
+    winston.level = config.winstonLevel;
+    var mongoURL = config.datasourceUrl;
     mongoose.connect(mongoURL);
     var db = mongoose.connection;
     db.on('error', function (error) {
@@ -36,7 +37,7 @@
     }));
     app.use(bodyParser.json({limit: '50mb'}));
     app.use(function (req, res, next) {
-        winston.silly("Request: ", req.url);
+        winston.info("Request: ", req.url);
         next();
     });
     require('./server/routeMapping')(app);
