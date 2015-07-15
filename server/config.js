@@ -8,10 +8,12 @@
             case 'DEV':
                 config.datasourceUrl = 'mongodb://localhost/history';
                 config.winstonLevel = 'silly';
+                config.environment = 'DEV';
                 break;
             default :
                 config.datasourceUrl = 'mongodb://localhost/history';
                 config.winstonLevel = 'info';
+                config.environment = 'PROD';
                 break;
         }
         return config;

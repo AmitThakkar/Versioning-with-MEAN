@@ -11,6 +11,7 @@
 
     winston.level = config.winstonLevel;
     var mongoURL = config.datasourceUrl;
+    winston.info('Starting Application in ' + config.environment + ' Environment');
     mongoose.connect(mongoURL);
     var db = mongoose.connection;
     db.on('error', function (error) {
