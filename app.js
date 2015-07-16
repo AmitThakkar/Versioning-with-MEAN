@@ -38,7 +38,7 @@
     }));
     app.use(bodyParser.json({limit: '50mb'}));
     app.use(function (req, res, next) {
-        winston.info("Request: ", req.url, 'Method: ', req.method);
+        winston.info("Request: ", req.url, 'Method: ', req.method, 'Time: ', new Date());
         next();
     });
     require('./server/routeMapping')(app);
