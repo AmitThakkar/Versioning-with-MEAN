@@ -7,6 +7,7 @@
     var bodyParser = require('body-parser');  // for reading POSTed form data into `req.body`
     var mongoose = require('mongoose');
     var winston = require('winston');
+    var cors = require('cors');
     var config = require('./server/config')();
 
     winston.level = config.winstonLevel;
@@ -30,7 +31,8 @@
 
     app.use('/build', express.static('build'));
     app.use(express.static('node_modules'));
-    app.use(allowCrossDomain);
+    app.use(cors());
+    //app.use(allowCrossDomain);
     // configure the app to use bodyParser()
     app.use(bodyParser.urlencoded({
         limit: '50mb',
